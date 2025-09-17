@@ -10,7 +10,7 @@ async function fetchWord() {
 }
 function getRandomWord(wordList) {
   const randomIndex = Math.floor(Math.random() * wordList.length);
-  return (word = wordList[randomIndex]);
+  return (word = wordList[randomIndex]); // Print the random word to the console.
 }
 
 let startGame = () => {
@@ -39,9 +39,11 @@ let startGame = () => {
     }
     let rows = updateDisplay();
     function enableRow(rowIndex) {
-      let inputs = rows[rowIndex];
+      let inputs = rows[rowIndex]; // get all inputs in this row
+      inputs[0].disabled = false; // enable first input
       inputs[0].focus();
 
+      // Allow typing across the row
       for (let i = 0; i < word.length; i++) {
         inputs[i].oninput = function () {
           this.value = this.value.toLowerCase();
