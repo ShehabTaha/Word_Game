@@ -2,7 +2,6 @@ async function fetchWord() {
   try {
     const response = await fetch("words.json");
     const data = await response.json();
-    console.log(data);
     getRandomWord(data);
     return data;
   } catch (error) {
@@ -11,14 +10,13 @@ async function fetchWord() {
 }
 function getRandomWord(wordList) {
   const randomIndex = Math.floor(Math.random() * wordList.length);
-  return (word = wordList[randomIndex]); // Print the random word to the console.
+  return (word = wordList[randomIndex]);
 }
 
 let startGame = () => {
   fetchWord().then((data) => {
     getRandomWord(data);
     function updateDisplay() {
-      console.log(word);
       for (let i = 0; i < 7; i++) {
         let div = document.createElement("div");
         div.classList.add("word");
@@ -41,11 +39,9 @@ let startGame = () => {
     }
     let rows = updateDisplay();
     function enableRow(rowIndex) {
-      let inputs = rows[rowIndex]; // get all inputs in this row
-      inputs[0].disabled = false; // enable first input
+      let inputs = rows[rowIndex];
       inputs[0].focus();
 
-      // Allow typing across the row
       for (let i = 0; i < word.length; i++) {
         inputs[i].oninput = function () {
           this.value = this.value.toLowerCase();
@@ -82,11 +78,8 @@ let startGame = () => {
     button.onclick = function () {
       for (let i = 0; i < rows.length; i++) {
         if (!rows[i][word.length - 1].disabled) {
-          console.log(!rows[i][word.length - 1].disabled);
           checkRow(i);
           if (i < rows.length - 1) {
-            console.log(i < rows.length - 1);
-            console.log(i + 1);
             enableRow(i + 1);
           } else {
             document.querySelector(".lose-popup").style.display = "block";
