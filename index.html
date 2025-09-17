@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <h1>Word Game</h1>
+    <p>Welcome to the Word Game! Try to guess the word.</p>
+    <div class="won-popup">
+      <h2>You won!</h2>
+      <button onclick="location.reload()">Play Again</button>
+    </div>
+    <div class="lose-popup">
+      <h2>You lost!</h2>
+      <p>The correct word was: <span id="correct-word"></span></p>
+      <button onclick="location.reload()">Play Again</button>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
