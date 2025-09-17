@@ -67,7 +67,7 @@ let startGame = () => {
         }
       });
       if (rows[row].every((input, index) => input.value === word[index])) {
-        document.querySelector(".popup").style.display = "block";
+        document.querySelector(".won-popup").style.display = "block";
         document.querySelectorAll(".word input").forEach((input) => {
           input.disabled = true;
         });
