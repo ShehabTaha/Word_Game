@@ -106,7 +106,7 @@ let startGame = () => {
       for (let i = 0; i < rows.length; i++) {
         if (!rows[i][word.length - 1].disabled) {
           checkRow(i);
-          if (i === rows.length - 1 && rows[i][word.length - 1].disabled) {
+          if (i === rows.length - 1 && !document.querySelector(".invalid-input").style.display === "block") {
             document.querySelector(".lose-popup").style.display = "block";
             document.getElementById("correct-word").textContent = word;
             return;
@@ -127,3 +127,4 @@ let startGame = () => {
 };
 
 window.onload = startGame();
+
