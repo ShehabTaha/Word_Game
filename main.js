@@ -71,6 +71,9 @@ let startGame = () => {
           }
         };
       }
+      console.log(
+        document.querySelector(".invalid-input").style.display === "none"
+      );
     }
     enableRow(0);
     function checkRow(row) {
@@ -108,7 +111,7 @@ let startGame = () => {
           checkRow(i);
           if (
             i === rows.length - 1 &&
-            !document.querySelector(".invalid-input").style.display === "block"
+            document.querySelector(".invalid-input").style.display === "none"
           ) {
             document.querySelector(".lose-popup").style.display = "block";
             document.getElementById("correct-word").textContent = word;
