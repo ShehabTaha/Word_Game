@@ -16,6 +16,7 @@ function getRandomWord(wordList) {
 let startGame = () => {
   fetchWord().then((data) => {
     getRandomWord(data);
+    console.log(word);
     function updateDisplay() {
       for (let i = 0; i < 7; i++) {
         let div = document.createElement("div");
@@ -110,7 +111,7 @@ let startGame = () => {
         if (!rows[i][word.length - 1].disabled) {
           checkRow(i);
           if (
-            i === rows.length - 1 &&
+            i === rows.length &&
             document.querySelector(".invalid-input").style.display === "none"
           ) {
             document.querySelector(".lose-popup").style.display = "block";
