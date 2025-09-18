@@ -16,6 +16,7 @@ function getRandomWord(wordList) {
 let startGame = () => {
   fetchWord().then((data) => {
     getRandomWord(data);
+    console.log(word);
     function updateDisplay() {
       for (let i = 0; i < 7; i++) {
         let div = document.createElement("div");
@@ -106,7 +107,10 @@ let startGame = () => {
       for (let i = 0; i < rows.length; i++) {
         if (!rows[i][word.length - 1].disabled) {
           checkRow(i);
-          if (i === rows.length - 1 && !document.querySelector(".invalid-input").style.display === "block") {
+          if (
+            i === rows.length - 1 &&
+            !document.querySelector(".invalid-input").style.display === "block"
+          ) {
             document.querySelector(".lose-popup").style.display = "block";
             document.getElementById("correct-word").textContent = word;
             return;
@@ -127,4 +131,3 @@ let startGame = () => {
 };
 
 window.onload = startGame();
-
