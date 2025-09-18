@@ -16,6 +16,7 @@ function getRandomWord(wordList) {
 let startGame = () => {
   fetchWord().then((data) => {
     getRandomWord(data);
+    console.log(word);
     function updateDisplay() {
       for (let i = 0; i < 7; i++) {
         let div = document.createElement("div");
@@ -38,6 +39,20 @@ let startGame = () => {
       return rows;
     }
     let rows = updateDisplay();
+    function erasing() {
+      document.querySelectorAll("input").forEach((input) => {
+        input.addEventListener("keydown", function (event) {
+          if (event.key === "Backspace" && this.value === "") {
+            let prevInput = this.previousElementSibling;
+            if (prevInput) {
+              prevInput.disabled = false;
+              prevInput.focus();
+            }
+          }
+        });
+      });
+    }
+
     function enableRow(rowIndex) {
       let inputs = rows[rowIndex];
       inputs[0].disabled = false;
@@ -49,12 +64,20 @@ let startGame = () => {
           if (i < word.length - 1) {
             inputs[i + 1].disabled = false;
             inputs[i + 1].focus();
+            erasing();
           }
         };
       }
     }
     enableRow(0);
     function checkRow(row) {
+      let regex = /^[a-z]$/;
+      for (let input of rows[row]) {
+        if (!regex.test(input.value)) {
+          document.querySelector(".invalid-input").style.display = "block";
+          return;
+        }
+      }
       rows[row].forEach((input, index) => {
         if (input.value === word[index] && input.value !== "") {
           input.classList.add("right");
@@ -80,9 +103,10 @@ let startGame = () => {
       for (let i = 0; i < rows.length; i++) {
         if (!rows[i][word.length - 1].disabled) {
           checkRow(i);
-          if (i < rows.length - 1) {
+          if (i < rows.length && rows[i][word.length - 1].disabled) {
             enableRow(i + 1);
-          } else {
+          }
+          if (i === rows.length - 1) {
             document.querySelector(".lose-popup").style.display = "block";
             document.getElementById("correct-word").textContent = word;
           }

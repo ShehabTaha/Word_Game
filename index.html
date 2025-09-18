@@ -18,6 +18,11 @@
       <p>The correct word was: <span id="correct-word"></span></p>
       <button onclick="location.reload()">Play Again</button>
     </div>
+    <div class="invalid-input">
+      <h2>Invalid Input!</h2>
+      <p>Please enter a valid word.</p>
+      <button onclick="this.parentElement.style.display='none'">OK</button>
+    </div>
     <script src="main.js"></script>
   </body>
 </html>
