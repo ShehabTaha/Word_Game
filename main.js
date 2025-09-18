@@ -42,8 +42,10 @@ let startGame = () => {
       document.querySelectorAll("input").forEach((input) => {
         input.addEventListener("keydown", function (event) {
           if (event.key === "Backspace" && this.value === "") {
+            event.preventDefault();
+            event.target.value = "";
             let prevInput = this.previousElementSibling;
-            if (prevInput) {
+            if (prevInput && this.value === "") {
               prevInput.disabled = false;
               prevInput.focus();
             }
@@ -60,9 +62,11 @@ let startGame = () => {
       for (let i = 0; i < word.length; i++) {
         inputs[i].oninput = function () {
           this.value = this.value.toLowerCase();
-          if (i < word.length - 1) {
+          if (i < word.length - 1 && this.value !== "") {
             inputs[i + 1].disabled = false;
             inputs[i + 1].focus();
+            erasing();
+          } else {
             erasing();
           }
         };
@@ -117,4 +121,3 @@ let startGame = () => {
 };
 
 window.onload = startGame();
-
