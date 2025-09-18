@@ -101,7 +101,10 @@ let startGame = () => {
         document.querySelector(".won-popup").style.display = "block";
         document.querySelectorAll(".word input").forEach((input) => {
           input.disabled = true;
+          return true;
         });
+      } else {
+        return false;
       }
     }
     let button = document.createElement("button");
@@ -111,13 +114,15 @@ let startGame = () => {
         if (!rows[i][word.length - 1].disabled) {
           checkRow(i);
           if (
-            i === rows.length &&
-            document.querySelector(".invalid-input").style.display === "none"
+            i === rows.length - 1 &&
+            document.querySelector(".invalid-input").style.display === "none" &&
+            checkRow(i) === false
           ) {
             document.querySelector(".lose-popup").style.display = "block";
             document.getElementById("correct-word").textContent = word;
             return;
           }
+          console.log(i);
           if (i < rows.length && rows[i][word.length - 1].disabled) {
             enableRow(i + 1);
           }
