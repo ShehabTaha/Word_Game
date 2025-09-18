@@ -106,17 +106,23 @@ let startGame = () => {
       for (let i = 0; i < rows.length; i++) {
         if (!rows[i][word.length - 1].disabled) {
           checkRow(i);
-          if (i < rows.length && rows[i][word.length - 1].disabled) {
-            enableRow(i + 1);
-          }
-          if (i === rows.length - 1) {
+          if (i === rows.length - 1 && rows[i][word.length - 1].disabled) {
             document.querySelector(".lose-popup").style.display = "block";
             document.getElementById("correct-word").textContent = word;
+            return;
+          }
+          if (i < rows.length && rows[i][word.length - 1].disabled) {
+            enableRow(i + 1);
           }
         }
       }
     };
     document.body.appendChild(button);
+    document.body.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        button.click();
+      }
+    });
   });
 };
 
